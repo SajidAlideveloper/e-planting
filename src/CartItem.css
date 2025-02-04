@@ -218,6 +218,8 @@
    }
 .continue_shopping_btn{
   margin-top: -50px;
+  height: 20rem;
+  width: 20rem;
 }
    @media (max-width: 768px) {
     .cart-container {

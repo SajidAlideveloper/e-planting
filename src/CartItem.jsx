@@ -2,6 +2,13 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {removeItem, updateQuantity} from './CartSlice.jsx';
 import './CartItem.css';
+import './ToastContainer.css'
+import {ToastContainer,toast} from 'react-toastify';
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import Checkout from './Checkout';
+import {useState} from 'react';
 
 const CartItem = ({ onContinueShopping}) => {
     const cart = useSelector(state => state.cart.items);
@@ -44,6 +51,21 @@ const CartItem = ({ onContinueShopping}) => {
 
 
 
+    //settingup stripe
+    const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+
+    const [showCheckout, setShowCheckout] = useState(false);
+
+    const handleCheckout = () => {
+        if (cart.length === 0) {
+           toast.error("You don't have any items yet.");
+        } else {
+            toast.success("checking out in progress");
+            setShowCheckout(true);
+        }
+    };
+
+
 
     return (
     <div className="cart-container">
@@ -70,9 +92,17 @@ const CartItem = ({ onContinueShopping}) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckout}>Checkout</button>
+          <ToastContainer className="toast-container" />
       </div>
+        {/* Conditionally show the checkout component */}
+        {showCheckout && (
+            <Elements stripe={stripePromise}>
+                <Checkout />
+            </Elements>
+        )}
     </div>
+
   );
 };
 
