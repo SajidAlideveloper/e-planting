@@ -233,14 +233,16 @@ body {
   
   @media (max-width: 768px) {
     .product-card {
-      flex: 1 1 calc(50% - 20px); /* Adjust width for 2 cards per row with 20px gap on small screens */
+      flex: 1 1 calc(45% - 20px); /* Adjust width for 2 cards per row with 20px gap on small screens */
       max-width: calc(50% - 20px); /* Adjust max-width for 2 cards per row with 20px gap on small screens */
     }
     .navbar {
-        flex-direction: column; /* Change flex direction to stack items vertically */
+        flex-direction: row; /* Change flex direction to stack items vertically */
         align-items: center; /* Align items to the center of the container */
-      }
-    
+    }
+    .nav_brand_name{
+        display: none;
+    }
       .tag {
         margin-bottom: 20px; /* Add margin bottom for spacing */
         text-align: center; /* Align text to the center */
@@ -256,3 +258,10 @@ body {
         text-align: center; /* Align text to the center */
       }
   }
+
+@media (max-width: 480px){
+    .product-card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(95% - 20px);
+    }
+}
