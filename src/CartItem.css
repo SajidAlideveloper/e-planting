@@ -101,13 +101,19 @@
     margin-top: 10px; /* Add margin top for spacing */
   }
 }
+.cart-container > div{
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}
 .cart-item {
     display: flex;
     border-bottom: 1px solid #ccc;
-    padding: 10px 0;
+    padding: 1rem;
     background-color: white;
     width: 500px;
-    gap: 30px;
+    gap: .7rem;
+
   }
   
   .cart-item-image {
@@ -221,7 +227,7 @@
   height: 20rem;
   width: 20rem;
 }
-   @media (max-width: 768px) {
+@media (max-width: 768px) {
     .cart-container {
       padding: 10px; /* Reduce padding */
     }
@@ -242,4 +248,3 @@
     transition: background-color 0.3s ease;
     margin-top: 40px;
   }
-  
