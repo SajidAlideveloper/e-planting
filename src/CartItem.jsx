@@ -52,12 +52,14 @@ const CartItem = ({ onContinueShopping }) => {
 
     const [showCheckout, setShowCheckout] = useState(false);
 
+    const [showReceipt, setShowReceipt] = useState(false);
+
     const handleCheckout = () => {
         if (cart.length === 0) {
             toast.error("You don't have any items yet.");
         } else {
             toast.success("Opening checkout...");
-            setShowCheckout(true);
+            setShowReceipt(true);
         }
     };
 
@@ -118,6 +120,30 @@ const CartItem = ({ onContinueShopping }) => {
                 </button>
                 <ToastContainer className="toast-container" />
             </div>
+
+            {/*Model to view reciept*/}
+            <Modal
+                isOpen={showReceipt} // Show this first
+                onRequestClose={() => setShowReceipt(false)}
+                contentLabel="Order Summary"
+                className="receipt-modal"
+                overlayClassName="checkout-overlay"
+            >
+                <h2>Order Summary</h2>
+                <div className="receipt-items">
+                    {cart.map(item => (
+                        <div key={item.name} className="receipt-item">
+                            <span>{item.name} (x{item.quantity})</span>
+                            <span>${calculateTotalCost(item).toFixed(2)}</span>
+                        </div>
+                    ))}
+                </div>
+                <h3>Total Amount: ${calculateTotalAmount(cart).toFixed(2)}</h3>
+                <button className={"modal-btn"} onClick={() => { setShowReceipt(false); setShowCheckout(true); }}>
+                    Proceed to Payment
+                </button>
+                <button className={'modal-btn'} onClick={() => setShowReceipt(false)}>Cancel</button>
+            </Modal>
 
             {/* Modal for Checkout */}
             <Modal
