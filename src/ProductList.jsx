@@ -258,6 +258,10 @@ function ProductList() {
        setShowCart(true); // Set showCart to true when cart icon is clicked
    };
 
+   const handleBuyNow = (product) =>{
+       handleAddedToCart(product);
+       setShowCart(true);
+   }
    const handlePlantsClick = (e) => {
         e.preventDefault();
         setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
@@ -325,6 +329,11 @@ function ProductList() {
                                 disabled={disabledProducts.includes(plant.name)}
                                 >
                                     {disabledProducts.includes(plant.name) ? 'Added to cart' : 'Add to cart'}
+                                </button>
+                                <button  className="product-button" onClick={() => handleBuyNow(plant)}
+                                disabled={disabledProducts.includes(plant.name)}
+                                >
+                                    Buy Now
                                 </button>
                             </div>
                         ))}
